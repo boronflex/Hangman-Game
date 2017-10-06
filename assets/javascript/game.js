@@ -1,92 +1,102 @@
 //game object
-//functions:
-//it should reset guesses to a fixed number
 
-var lives = 12;
+var hangmanGame = {
+  //game object it should pick a random word
+  //game object it should choose a new word after a win or a loss
+  randomWordBank: ["lionel", "ritchie", "legend", "commodores", "solo"],
 
-function resetLives() {
-  lives = 12
-}
+  randomWordList: [],
+  //create array
+  //foreach split up word into array of objects
+  // {letter 'string':showMe true/false}
 
-//it should pick a random word
-//it should choose a new word after a win or a loss
+  splitRandom: function(getWord){
+  var getWord = this.randomWordBank[Math.floor(Math.random()*this.randomWordBank.length)];
+    for(var i = 0; i < getWord.length; i++){
+      this.randomWordList.push({
+        rLetter: getWord[i],
+        guessedYet: false
+      });
+    }
+  },
 
-var rando = 'illgettoit'
+  //#############vetted and error checked to this point##################
 
-//it should take user letter guesses and save them
-var uGuessesRaw = [];
-var uGuesses = [];
+  //resets lives
+  lives: 12,
 
-function getGuess(guess) {
-	var guessLetter = guess;
-	var indexInWord = 0;
-	if (uGuesses.indexOf(guessLetter) === -1) {
-	  if (guessLetter.length === 1 && typeof guessLetter ==='string'){
-	    indexInWord = rando.indexOf(guessLetter);
-	    uGuessesRaw.push(guessLetter);
-	    uGuesses.splice(indexInWord, 0, guessLetter);
-	    //problem here is the letters need to be in the order the user put in
-	    //we'll need another list, storing redundant data not best practice but
-	    //will prob get job done
-		  console.log(guessLetter);
-	  } else {
-	    console.log("please enter only 1 alpha character bro")
-	  }
-	} else {
-	  console.log("letter already used");
-	}
-}
-//it should show the current guesses in order entered
+  resetLives: function () {
+    this.lives = 12
+  },
 
-function displayGuesses() {
-  console.log(uGuessesRaw);
-}
+  gameOver: function(){
+    if (this.lives === 0){
+      console.log("Game Over")
+    }
+  },
 
-//it should if the guess is correct the letter should be revealed in hidden word
+  //gets a user guess uGuesses = [{letterGuessed:isInWord:},{}]
+  userGuessList: [],
 
+  getGuess: function(guess) {
+    var guessLetter = guess;
+    var indexInWord = this.randomWord.indexOf(guessLetter);
 
+    //checks if letter has been guessed
+    if (this.userGuessList.indexOf(guessLetter) === -1) {
+      //validates type and length
+      if (guessLetter.length === 1 && typeof guessLetter ==='string'){
+        //checks if th guessed letter is in the random word
+        if (indexInWord === -1) {
+          this.userGuessList.push({
+            letterGuessed: guessLetter,
+            isInWord: false
+          });
+          lives -= 1;
+        } else {
+          this.userGuessList.push({
+            letterGuessed: guessLetter,
+            isInWord: true
+          });
+          this.randomWordList[indexInWord].guessedYet = true;
+        }
+      } else {
+        console.log("please enter only 1 alpha character bro")
+        alert("please enter only 1 alpha character bro")
+      }
+    } else {
+      console.log("letter already used");
+    }
 
-//this should be part of validating the letter but it doesnt completely belong-revisit later
-//this might be unecessary is wordVerify below covers this role
-function searchWord(guess) {
-  var findIt = guess;
-  if (rando.indexOf(findIt) === -1){
-    lives -= 1;
-  } else {
-    console.log("success the letter is in the word");
+    this.compareWords();
+    this.gameOver();
+  },
+
+  //compared how many true user guesses there are to the length of the random word
+  compareWords: function () {
+    var totalLetters = this.randomWordList.length;
+    var lettersGuessed = 0;
+    this.randomWordList.forEach(function(letter){
+      if (letter.guessedYet === true){
+        lettersGuessed += 1;
+      }
+    });
+    if (totalLetters === lettersGuessed){
+      this.resetLives();
+      console.log("you win!");
+    }
   }
 }
 
-function wordVerify(){
-  var combinedWord = '';
-  for (var i = 0; i < uGuesses.length; i += 1) {
-    combinedWord = combinedWord + uGuesses[i];
-  }
-  if (combinedWord === rando){
-    resetLives();
-    console.log("you win!");
-  }else{
-    lives -=1;
-  }
+var handler {
+//handler it should add <li>s to a list as the number of blanks
+//handler it should edit the html in the li s to correctly guessed letters 
 }
 
-//it should if the guess is incorrect lose a guess (see above)
-
-//it should verify status win/loss/continue
-//it souold verify the array against the word
-
-//might be redundant given above
-function winLoss() {
-  if (lives < 1) {
-    console.log("you lose");
-    resetLives();
-  } else if (lives > 1) {
-    console.log("continue");
-  }
+var view {
+//view it should show the current guesses in order entered (go by index for now)
+//view it should add li to ul object 
 }
-//it should start new game after win loss
-
-
 
 
 //see week 3 exercise 21 for events example
