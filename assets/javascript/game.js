@@ -29,7 +29,7 @@ var hangmanGame = {
   userGuessList: [],
 
   getGuess: function(guess) {
-    var guessLetter = String(guess);
+    var guessLetter = guess.toLowerCase();
     //var indexInWord = this.randomWordList.indexOf(guessLetter);
     var validateInput = /[a-zA-z]/.test(guessLetter);
 
@@ -45,19 +45,21 @@ var hangmanGame = {
       });
 
       if (i > -1){
+
         this.randomWordList.forEach(function(letter){
           if (letter.rLetter === guessLetter){
-            console.log("right");
             letter.guessedYet = true;
             i += 1;
-            this.userGuessList.push({
-              letterGuessed: guessLetter,
-              isInWord: true
-            });
           }
         });
 
-        if (i === 0) {
+        if (i >= 1) {
+          console.log("right");
+          this.userGuessList.push({
+            letterGuessed: guessLetter,
+            isInWord: true
+          });
+        } else if (i === 0) {
           console.log("wrong");
           this.userGuessList.push({
             letterGuessed: guessLetter,
@@ -69,7 +71,13 @@ var hangmanGame = {
     } else {
       console.log("enter only 1 alpha character")
     }
+    this.compareWords();
+  },
 
+  reset: function(){
+    this.lives = 12;
+    this.userGuessList = [];
+    this.randomWordList = [];
   },
 
   //compared how many true user guesses there are to the length of the random word
@@ -78,7 +86,8 @@ var hangmanGame = {
     var lettersGuessed = 0;
 
     if (this.lives === 0){
-      console.log("Game Over")
+      this.reset();
+      console.log("Game Over");
     } else {
       this.randomWordList.forEach(function(letter){
         if (letter.guessedYet === true){
@@ -86,7 +95,7 @@ var hangmanGame = {
         }
       });
       if (totalLetters === lettersGuessed){
-        this.lives = 12;
+        this.reset();
         console.log("you win!");
       }
     }
