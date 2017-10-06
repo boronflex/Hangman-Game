@@ -22,70 +22,75 @@ var hangmanGame = {
 
   //#############vetted and error checked to this point##################
 
-  //resets lives
+  //lives
   lives: 12,
-
-  resetLives: function () {
-    this.lives = 12
-  },
-
-  gameOver: function(){
-    if (this.lives === 0){
-      console.log("Game Over")
-    }
-  },
 
   //gets a user guess uGuesses = [{letterGuessed:isInWord:},{}]
   userGuessList: [],
 
   getGuess: function(guess) {
-    var guessLetter = guess;
-    var indexInWord = this.randomWord.indexOf(guessLetter);
+    var guessLetter = String(guess);
+    //var indexInWord = this.randomWordList.indexOf(guessLetter);
+    var validateInput = /[a-zA-z]/.test(guessLetter);
 
-    //checks if letter has been guessed
-    if (this.userGuessList.indexOf(guessLetter) === -1) {
-      //validates type and length
-      if (guessLetter.length === 1 && typeof guessLetter ==='string'){
-        //checks if th guessed letter is in the random word
-        if (indexInWord === -1) {
+    i = 0;
+
+    if (guessLetter.length === 1 && validateInput === true) {
+
+      this.userGuessList.forEach(function(letter) {
+        if(letter.letterGuessed === guessLetter){
+          i = -1
+          console.log(guessLetter+" has already been picked");
+        }
+      });
+
+      if (i > -1){
+        this.randomWordList.forEach(function(letter){
+          if (letter.rLetter === guessLetter){
+            console.log("right");
+            letter.guessedYet = true;
+            i += 1;
+            this.userGuessList.push({
+              letterGuessed: guessLetter,
+              isInWord: true
+            });
+          }
+        });
+
+        if (i === 0) {
+          console.log("wrong");
           this.userGuessList.push({
             letterGuessed: guessLetter,
             isInWord: false
           });
-          lives -= 1;
-        } else {
-          this.userGuessList.push({
-            letterGuessed: guessLetter,
-            isInWord: true
-          });
-          this.randomWordList[indexInWord].guessedYet = true;
+          this.lives -= 1;
         }
-      } else {
-        console.log("please enter only 1 alpha character bro")
-        alert("please enter only 1 alpha character bro")
       }
     } else {
-      console.log("letter already used");
+      console.log("enter only 1 alpha character")
     }
 
-    this.compareWords();
-    this.gameOver();
   },
 
   //compared how many true user guesses there are to the length of the random word
   compareWords: function () {
     var totalLetters = this.randomWordList.length;
     var lettersGuessed = 0;
-    this.randomWordList.forEach(function(letter){
-      if (letter.guessedYet === true){
-        lettersGuessed += 1;
+
+    if (this.lives === 0){
+      console.log("Game Over")
+    } else {
+      this.randomWordList.forEach(function(letter){
+        if (letter.guessedYet === true){
+          lettersGuessed += 1;
+        }
+      });
+      if (totalLetters === lettersGuessed){
+        this.lives = 12;
+        console.log("you win!");
       }
-    });
-    if (totalLetters === lettersGuessed){
-      this.resetLives();
-      console.log("you win!");
     }
-  }
+  },
 }
 
 var handler {
