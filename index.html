@@ -1,51 +1,104 @@
-<!--this is from the evens exampl activity 21 week 3 -->
-<!-- modifying this should solve the show letters problem-->
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Events!</title>
+    <title>The Guessing Game</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
   </head>
   <body>
   <body>
+    <nav class="navbar navbar-default" id="navbarmarginadjust">
+      <div class="container-fluid">
+        <div class="container">
+          <h4 class="text-center">Random Lionel Ritche Related Words Game!</h4>
+        </div>
+      </div>
+    </nav>
     <div class="container">
       <div class="row">
-        <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-6">
           <div class="jumbotron">
-            <h2>Random Lionel Ritche Related Word!</h2>
-            <ul class="list-inline" id="randomWordList">
-              
-            </ul>
+            <h3 class="text-center">Random Word</h3>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <ul class="list-inline" id="randomWordList">
+                </ul>
+              </div>
+            </div>
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"onclick="handlers.addTodo()">Start!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel-default">
+            <div class="panel-heading">
+              <h1 class="panel-title my-headers">The Reward</h1>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/nqAvFx3NxUM"></iframe>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-offset-2 col-md-8">
+        <div class="col-md-6">
           <div class="jumbotron">
-            <h2>Your guesses</h2>
-            <ul class="list-inline" id="userGuessList">
-              
-            </ul>
+            <div class="row">
+              <div class="col-sm-2">
+              </div>
+              <div class="col-sm-5">
+                <h3 class="text-right">Guesses Left:</h3>
+              </div>
+              <div class="col-sm-3">
+                <h3 class="">12</h3><!--number of lives here-->
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <ul class="list-inline" id="userGuessList">
+                </ul>
+              </div>
+            </div>
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"onclick="handlers.addTodo()">Guess!</button>
+              </span>
+              <input type="text" class="form-control" placeholder="Enter a letter">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel-default">
+            <div class="panel-heading">
+              <h1 class="panel-title my-headers">The Punishment</h1>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h3>Surprise Chaka! There are no Punishments!</h3>
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VJYfUS96f6w"></iframe>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- We have to put this at the end of our document to ensure the user-text
-         span exists when we try to access it. -->
     <script src="assets/javascript/game.js"></script>
-<!--       // Let's start by grabbing a reference to the <span> below.
-      var userText = document.getElementById("user-text");
 
-      // Next, we give JavaScript a function to execute when onkeyup event fires.
-      document.onkeyup = function(event) {
-        userText.textContent = event.key;
-      }; -->
     </script>
   </body>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </html>
