@@ -15,7 +15,22 @@
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <div class="jumbotron">
-            <h2>You just typed <span id="user-text"><strong>...Nothing.</strong></span></h2>
+            <h2>Random Lionel Ritche Related Word!</h2>
+            <ul class="list-inline" id="randomWordList">
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="jumbotron">
+            <h2>Your guesses</h2>
+            <ul class="list-inline" id="userGuessList">
+              
+            </ul>
           </div>
         </div>
       </div>
@@ -23,14 +38,14 @@
 
     <!-- We have to put this at the end of our document to ensure the user-text
          span exists when we try to access it. -->
-    <script type="text/javascript">
-      // Let's start by grabbing a reference to the <span> below.
+    <script src="assets/javascript/game.js"></script>
+<!--       // Let's start by grabbing a reference to the <span> below.
       var userText = document.getElementById("user-text");
 
       // Next, we give JavaScript a function to execute when onkeyup event fires.
       document.onkeyup = function(event) {
         userText.textContent = event.key;
-      };
+      }; -->
     </script>
   </body>
 </html>

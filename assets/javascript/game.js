@@ -102,12 +102,45 @@ var hangmanGame = {
   },
 }
 
-var handler {
+var handler = {
 //handler it should add <li>s to a list as the number of blanks
+  displayGuesses: function() {
+    var randomWordUl = document.getElementById('randomWordList');
+    randomWordUl.innerHTML = '';
+
+    //reveals letters of hidden word    
+    hangmanGame.randomWordList.forEach(function(guess, position) {
+      var guessLi = document.createElement('li');
+      var letterInHiddenWord = '_';
+
+      if (guess.guessedYet === true) {
+        letterInHiddenWord = guess.rLetter;
+      }
+      
+      guessLi.id = position;
+      guessLi.textContent = letterInHiddenWord;
+      randomWordUl.appendChild(guessLi);
+    }, this);
+
+    //shows user guesses so far
+    var userGuessesUl = document.getElementById('userGuessList');
+    userGuessesUl.innerHTML = '';
+
+    hangmanGame.userGuessList.forEach(function(guess, position) {
+      var userGuessLi = document.createElement('li');
+      var userLetter = guess.letterGuessed + ', ';
+      
+      userGuessLi.id = position;
+      userGuessLi.textContent = userLetter;
+      userGuessesUl.appendChild(userGuessLi);
+    }, this);
+    
+    //this is significant call back function cant refer to methods in the object without it
+  }
 //handler it should edit the html in the li s to correctly guessed letters 
 }
 
-var view {
+var view = {
 //view it should show the current guesses in order entered (go by index for now)
 //view it should add li to ul object 
 }
