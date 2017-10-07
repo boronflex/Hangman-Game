@@ -12,7 +12,7 @@
     <nav class="navbar navbar-default" id="navbarmarginadjust">
       <div class="container-fluid">
         <div class="container">
-          <h4 class="text-center">Random Lionel Ritche Related Words Game!</h4>
+          <h2 class="text-center">Random Lionel Ritche Related Words Game!</h2>
         </div>
       </div>
     </nav>
@@ -29,7 +29,7 @@
             </div>
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"onclick="handlers.addTodo()">Start!</button>
+                <button class="btn btn-default" type="button"onclick="handlers.startGame()">Start!</button>
               </span>
             </div>
           </div>
@@ -42,7 +42,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/nqAvFx3NxUM"></iframe>
+                  <iframe class="embed-responsive-item" style="visibility: hidden" id="theReward" src="https://www.youtube.com/embed/XTrCDZgdD80"></iframe>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@
                 <h3 class="text-right">Guesses Left:</h3>
               </div>
               <div class="col-sm-3">
-                <h3 class="">12</h3><!--number of lives here-->
+                <h3 class="" id="livesLeft">12</h3><!--number of lives here-->
               </div>
             </div>
             <div class="panel panel-default">
@@ -72,9 +72,9 @@
             </div>
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button"onclick="handlers.addTodo()">Guess!</button>
+                <button class="btn btn-default" type="button"onclick="handlers.getGuess()">Guess!</button>
               </span>
-              <input type="text" class="form-control" placeholder="Enter a letter">
+              <input type="text" class="form-control" id="getUserGuess" placeholder="Enter a letter">
             </div>
           </div>
         </div>
@@ -85,9 +85,9 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-body">
-                <h3>Surprise Chaka! There are no Punishments!</h3>
+                <h3 style="visibility: hidden" id="hiddenChakaTitle">Surprise Chaka! There are no Punishments!</h3>
                 <div class="embed-responsive embed-responsive-16by9">
-                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/VJYfUS96f6w"></iframe>
+                  <iframe class="embed-responsive-item" style="visibility: hidden" id="theChaka" src="https://www.youtube.com/embed/dOrp4smAmHg"></iframe>
                 </div>
               </div>
             </div>
