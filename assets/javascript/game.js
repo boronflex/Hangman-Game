@@ -3,7 +3,8 @@
 var hangmanGame = {
   //game object it should pick a random word
   //game object it should choose a new word after a win or a loss
-  randomWordBank: ["lionel", "ritchie", "legend", "commodores", "solo"],
+  randomWordBank: ["lionel", "ritchie", "legend", "commodores", "solo",
+   "singer", "songwriter", "hello", "lady", "sail"],
 
   randomWordList: [],
   //create array
@@ -32,7 +33,7 @@ var hangmanGame = {
   getGuess: function(guess) {
     var guessLetter = guess.toLowerCase();
     //var indexInWord = this.randomWordList.indexOf(guessLetter);
-    var validateInput = /[a-zA-z]/.test(guessLetter);
+    var validateInput = /[a-zA-Z]/.test(guessLetter);
 
     i = 0;
 
@@ -81,8 +82,6 @@ var hangmanGame = {
     this.randomWordList = [];
     document.getElementById("theReward").style.visibility = "hidden";
     document.getElementById("theChaka").style.visibility = "hidden";
-    document.getElementById("hiddenChakaTitle").style.visibility = "hidden";
-
   },
 
   //compared how many true user guesses there are to the length of the random word
@@ -93,7 +92,7 @@ var hangmanGame = {
     if (this.lives === 0){
       alert("You Lose!")
       document.getElementById("theChaka").style.visibility = "visible";
-      document.getElementById("hiddenChakaTitle").style.visibility = "visible";
+      document.getElementById("hiddenChakaTitle").textContent = "Hidden Chaka-There is no punishment!!";
       console.log("Game Over");
     } else {
       this.randomWordList.forEach(function(letter){
@@ -107,7 +106,7 @@ var hangmanGame = {
         console.log("you win!");
       }
     }
-  },
+  }
 }
 
 var handlers = {
@@ -124,9 +123,7 @@ var handlers = {
     getUserLetterInput.value = '';
     view.displayGuesses();
     view.resetGuesses();
-  },
-
-
+  }
 
 }
 
@@ -170,6 +167,3 @@ var view = {
     livesCounter.textContent = hangmanGame.lives;
   }
 }
-
-
-//see week 3 exercise 21 for events example
